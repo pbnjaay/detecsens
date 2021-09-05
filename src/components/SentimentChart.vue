@@ -1,5 +1,5 @@
 <template>
-  <canvas :id="id" width="200" height="200"></canvas>
+  <canvas :id="id" width="400" height="400"></canvas>
 </template>
 
 <script>
@@ -12,12 +12,12 @@ export default {
         },
         id: {
             required: true,
-            type: Number
         },
     },
     mounted() {
         const ctx = document.getElementById(this.id).getContext('2d');
         new Chart(ctx, sentimentData(this.score));
+        console.log(this.score);
     }
 };
 </script>

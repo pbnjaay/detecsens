@@ -1,12 +1,12 @@
 export const sentimentChartData = (score) => {
   return {
-    type: "doughnut",
+    type: "line",
     data: {
       labels: Object.keys(score),
       datasets: [
         {
-          label: "# of Votes",
-          data: Object.values(score),
+          label: "Dominent sentiment",
+          data: Object.values(score).map((v) => (v * 100).toFixed(1)),
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(54, 162, 235, 0.2)",

@@ -1,71 +1,40 @@
 <template>
-  <div class="home">
-    <p class="text-muted">{{ count }} results</p>
-    <div v-for="(tweet, index) in tweets" :key="index" class="block">
-      <div class="tweet" v-show="visible">
-        <div class="tweet__header">
-          <span>{{ tweet.emoji }} {{ tweet.sentiment }}</span>
-          <button @click="zip">switch</button>
-        </div>
-        <p>{{ tweet.text }}</p>
-      </div>
-      <sentiment-chart :score="tweet.score" :id="index" v-show="!visible" />
-    </div>
-  </div>
+<div class="home">
+<div class="form container">
+      <form>
+        <input type="text" v-model="user" name="" id="" placeholder="user example: POTUS">
+        <router-link :to="{name: 'result', params: {userId: user, hashtag:hashtag }}" class="btn" >Analyse</router-link>
+      </form>
+</div>
+</div>
 </template>
 
 <script>
 // @ is an alias to /src
-import axios from "axios";
 import { ref, onMounted } from "vue";
-import SentimentChart from "@/components/SentimentChart.vue";
+import Tweet from '../components/Tweet.vue';
 
 export default {
   name: "Home",
   components: {
-    SentimentChart,
+    Tweet
   },
   setup() {
-    const tweets = ref([]);
-    const count = ref(0);
-    const baseUrl = ref("http://localhost:5000/api/v1/macky_sall");
-    const visible = ref(false)
+    const user = ref("");
+    const hashtag = ref("");
 
-    const getTweet = async () => {
-      const res = await axios.get(baseUrl.value);
-      tweets.value = res.data.data;
-      count.value = res.data.count;
-    };
-
-    const zip = () => {
-      this.visible.value = !this.visible.value;
-    }
-
-    onMounted(getTweet);
-
-    return { tweets, getTweet, baseUrl, visible, zip, count };
+    return {user, hashtag };
   },
 };
 </script>
 
 <style scoped>
-
-.block {
-  width: 90vw;
-}
-.tweet {
-  border-radius: 5px;
-  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
-  border: 2px solid transparent;
-  margin-bottom: 3rem;
-  padding: 1rem 0.6rem;
-  cursor: pointer;
-}
-
-.tweet__header {
+.header {
+  height: 4rem;
+  border-bottom: 1px solid  rgba(161, 159, 159, 0.19);
   display: flex;
-  justify-content: space-between;
-  font-weight: bold;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 @media screen and (min-width: 1024px) {
@@ -74,14 +43,69 @@ export default {
   }
 }
 
-.home {
+.list {
+  list-style: none;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.text-muted {
-  color: rgb(161, 159, 159);
+.list__item {
+  margin-right: 3rem;
+}
+
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 89vh;
+  width: 100vw;
+}
+
+  form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: .6rem .7rem;
+    border-radius: 9px;
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
+  }
+@media screen and (min-width: 1024px) {
+  .form {
+    width: 30vw;
+  }
+
+  form {
+    padding: 2rem 3rem; 
+  }
+}
+
+.home__left {
+  border-right: 1px solid  rgba(161, 159, 159, 0.19);
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+
+form > input, textarea {
+  margin-bottom: 2rem;
+}
+
+input[type="text"] {
+  outline: none;
+  border-radius: 40px;
+  padding: .9rem .7rem;
+  border: none;
+  background-color: rgba(161, 159, 159, 0.19);
+}
+
+textarea {
+  outline: none;
+  border-radius: 9px;
+  padding: .9rem .7rem;
+  border: none;
+  background-color: rgba(161, 159, 159, 0.19);
 }
 </style>
