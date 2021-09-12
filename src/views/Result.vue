@@ -1,7 +1,7 @@
 <template>
 <div class="loader" v-if="loading">Please wait ...</div>
 <div v-else>
-      <div class="home container">
+      <div v-if="!error" class="home container">
     <div class="home__left">
       <div class="header">
         <router-link to="/">Home</router-link>
@@ -22,6 +22,7 @@
       </form>
     </aside>
   </div>
+  <h1 v-else>{{error}}</h1>
 </div>
 </template>
 
@@ -47,12 +48,18 @@ export default {
     const visible = ref(false)
     const loading = ref(true)
     const hashtag = ref("");
+    const error = ref("")
 
     const getTweet = async () => {
-      const res = await axios.get(baseUrl.value);
-      loading.value = false;
-      tweets.value = res.data.data;
-      count.value = res.data.count;
+      try {
+          const res = await axios.get(baseUrl.value);
+          loading.value = false;
+          tweets.value = res.data.data;
+          count.value = res.data.count;
+      } catch (err) {
+        error.value = err.message;
+        loading.value = false;
+      }
     };
 
     const zip = () => {
@@ -68,7 +75,7 @@ export default {
     }
     onMounted(getTweet);
 
-    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter };
+    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, error };
   },
 };
 </script>

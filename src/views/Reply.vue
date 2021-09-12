@@ -1,7 +1,7 @@
 <template>
 <div class="loader" v-if="loading">Please wait ...</div>
 <div v-else>
-      <div class="home container">
+      <div v-if="!error" class="home container">
     <div class="home__left">
       <div class="header">
         <router-link to="/">Home</router-link>
@@ -15,6 +15,7 @@
         <sentiment-chart :score="score" id="1" class="chart"/>
     </aside>
   </div>
+  <h1 v-else>{{error}}</h1>
 </div>
 </template>
 
@@ -41,17 +42,23 @@ export default {
     const loading = ref(true)
     const hashtag = ref("");
     const score = ref({})
+    const error = ref("")
 
     const getScore = async () => await axios.get(baseUrl.value + "/avg");
 
     const getTweet = async () => await axios.get(baseUrl.value);
 
     const getAll = async () => {
+      try {
         const [res, avg] = await Promise.all([getTweet(), getScore()]);
         loading.value = false;
         score.value = avg.data.average;
         tweets.value = res.data.data;
         count.value = res.data.count;
+      } catch (err) {
+        err = error.message;
+        loading.value = false;
+      }
     }
 
     const zip = () => {
@@ -67,7 +74,7 @@ export default {
     }
     onMounted(getAll);
 
-    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, score, getScore, getAll };
+    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, score, getScore, getAll, error };
   },
 };
 </script>
