@@ -1,12 +1,11 @@
 <template>
 <div class="loader" v-if="loading">Please wait ...</div>
 <div v-else>
-      <div v-if="!error" class="home container">
+  <div v-if="!error" class="home container">
     <div class="home__left">
       <div class="header">
-        <router-link to="/">Home</router-link>
+        <h1 class="text-muted">Last {{ count }} posts of <a :href="twi">@{{$route.params.userId}}</a></h1>
       </div>
-        <p class="text-muted">Last {{ count }} posts of @{{$route.params.userId}}</p>
         <div v-for="tweet in tweets" :key="tweet.id" class="block">
         <router-link :to="{name:'reply', params: {tweetId: tweet.id }}">
             <tweet :tweet="tweet"/>
@@ -49,6 +48,7 @@ export default {
     const loading = ref(true)
     const hashtag = ref("");
     const error = ref("")
+    const twi = ref(`http://twitter.com/${route.params.userId}`)
 
     const getTweet = async () => {
       try {
@@ -75,7 +75,7 @@ export default {
     }
     onMounted(getTweet);
 
-    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, error };
+    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, error, twi };
   },
 };
 </script>
@@ -90,6 +90,27 @@ export default {
   .block {
     width: 50vw;
   }
+
+  aside form {
+    display: flex;
+  }
+
+  .home {
+  display: grid;
+  grid-template-columns: 0.6fr .4fr;
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+}
+
+h1 {
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
 }
 
 .header {
@@ -102,23 +123,22 @@ export default {
   z-index: 8;
   display: flex;
   align-items: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.home__left {
+  border-right: 1px solid  rgba(161, 159, 159, 0.19);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header a {
     margin-left: 9px;
     color: #42b983;
-}
-
-.home {
-  display: grid;
-  grid-template-columns: 0.6fr .4fr;
-  /* display: flex;
-  flex-direction: row; */
-  /* justify-content: center; */
-  /* align-items: center; */
-}
-.home__left {
-  border-right: 1px solid  rgba(161, 159, 159, 0.19);
 }
 
 .container {
@@ -131,7 +151,7 @@ export default {
 }
 
 form {
-  display: flex;
+  display: none;
   position: sticky;
   top: 3rem;
   margin-left: 3rem;

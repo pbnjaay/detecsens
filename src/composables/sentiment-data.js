@@ -1,6 +1,6 @@
 export const sentimentChartData = (score) => {
   return {
-    type: "line",
+    type: "pie",
     data: {
       labels: Object.keys(score),
       datasets: [
@@ -8,17 +8,12 @@ export const sentimentChartData = (score) => {
           label: "Dominent sentiment",
           data: Object.values(score).map((v) => (v * 100).toFixed(1)),
           backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
+            "orange",
+            "rgb(224, 16, 16)",
+            "rgb(161, 159, 159)",
+            "#42b983",
           ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-          ],
+          borderColor: ["orange", "red", "rgb(161, 159, 159)", "#42b983"],
           borderWidth: 1,
         },
       ],

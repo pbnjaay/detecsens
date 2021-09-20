@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import N404 from "../views/N404.vue";
 
 const routes = [
   {
@@ -54,6 +55,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/SenForm.vue"),
   },
+  { path: "/:catchAll(.*)", component: N404 },
 ];
 
 const router = createRouter({

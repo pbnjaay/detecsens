@@ -4,9 +4,8 @@
       <div v-if="!error" class="home container">
     <div class="home__left">
       <div class="header">
-        <router-link to="/">Home</router-link>
+        <h1 class="text-muted">Last {{ count }} replies of the <a :href="url">article</a> at seneweb</h1>
       </div>
-        <p class="text-muted">Last {{ count }} replies of the <a :href="url">article</a> at seneweb</p>
         <div v-for="tweet in tweets" :key="tweet.id" class="block">
             <tweet :tweet="tweet"/>
         </div>
@@ -70,16 +69,12 @@ export default {
 
 <style scoped>
 
-.block {
-  width: 90vw;
+h1 {
+      display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
 }
-
-@media screen and (min-width: 1024px) {
-  .block {
-    width: 50vw;
-  }
-}
-
 
 .header {
   height: 5rem;
@@ -91,7 +86,37 @@ export default {
   z-index: 8;
   display: flex;
   align-items: center;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }
+
+aside {
+  display: none;
+}
+
+.block {
+  width: 90vw;
+}
+
+@media screen and (min-width: 1024px) {
+  .block {
+    width: 50vw;
+  }
+  aside {
+    display: block;
+  }
+  .home {
+  display: grid;
+  grid-template-columns: 0.6fr .4fr;
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+}
+
+
 
 .chart {
     position: fixed;
@@ -103,16 +128,12 @@ export default {
     color: #42b983;
 }
 
-.home {
-  display: grid;
-  grid-template-columns: 0.6fr .4fr;
-  /* display: flex;
-  flex-direction: row; */
-  /* justify-content: center; */
-  /* align-items: center; */
-}
 .home__left {
   border-right: 1px solid  rgba(161, 159, 159, 0.19);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {

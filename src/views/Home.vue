@@ -11,7 +11,7 @@
 
 <script>
 // @ is an alias to /src
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import Tweet from '../components/Tweet.vue';
 
 export default {
