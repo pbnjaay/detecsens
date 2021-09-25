@@ -7,7 +7,7 @@
         <h1 class="text-muted">Last {{ count }} posts of <a :href="twi">@{{$route.params.userId}}</a></h1>
       </div>
         <div v-for="tweet in tweets" :key="tweet.id" class="block">
-        <router-link :to="{name:'reply', params: {tweetId: tweet.id }}">
+        <router-link :to="{name:'reply', params: {tweetId: tweet.id, userId: $route.params.userId }}">
             <tweet :tweet="tweet"/>
         </router-link>
       <!-- <sentiment-chart :score="tweet.score" :id="index" v-show="!visible" /> -->
@@ -107,10 +107,14 @@ export default {
 }
 
 h1 {
-      display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
+}
+
+form > h1 {
+  height:  initial;
 }
 
 .header {

@@ -4,7 +4,7 @@
       <div v-if="!error" class="home container">
     <div class="home__left">
       <div class="header">
-        <h1 class="text-muted">Last {{ count }} replies of the <a :href="'twitter.com/'+$route.params.tweetId" target="_blank" rel="noopener noreferrer">tweet</a></h1>
+        <h1 class="text-muted">Last {{ count }} replies of the <a :href="twi" target="_blank" rel="noopener noreferrer">tweet</a></h1>
       </div>
         
         <div v-for="tweet in tweets" :key="tweet.id" class="block">
@@ -43,6 +43,7 @@ export default {
     const hashtag = ref("");
     const score = ref({})
     const error = ref("")
+    const twi = ref(`http://twitter.com/${route.params.userId}/status/${route.params.tweetId}`)
 
     const getScore = async () => await axios.get(baseUrl.value + "/avg");
 
@@ -74,7 +75,7 @@ export default {
     }
     onMounted(getAll);
 
-    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, score, getScore, getAll, error };
+    return { tweets, getTweet, baseUrl, visible, zip, count, loading, hashtag, filter, score, getScore, getAll, error, twi };
   },
 };
 </script>

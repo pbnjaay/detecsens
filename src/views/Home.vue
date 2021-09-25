@@ -2,7 +2,8 @@
 <div class="home">
 <div class="form container">
       <form>
-        <input type="text" v-model="user" name="" id="" placeholder="user example: POTUS">
+        <h2>Analyse sentiment by twitter user</h2>
+        <input type="text" v-model="user" name="" id="" placeholder="username example: macky_sall">
         <router-link :to="{name: 'result', params: {userId: user, hashtag:hashtag }}" class="btn" >Analyse</router-link>
       </form>
 </div>
@@ -55,6 +56,7 @@ export default {
 
 .form {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 89vh;
@@ -65,17 +67,17 @@ export default {
     display: flex;
     width: 100%;
     flex-direction: column;
-    padding: .6rem .7rem;
+    padding:.6rem .7rem;
     border-radius: 9px;
     box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
   }
 @media screen and (min-width: 1024px) {
   .form {
-    width: 30vw;
+    width: 40vw;
   }
 
   form {
-    padding: 2rem 3rem; 
+    padding: 1rem 2rem; 
   }
 }
 

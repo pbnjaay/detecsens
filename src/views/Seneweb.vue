@@ -4,7 +4,7 @@
       <div v-if="!error" class="home container">
     <div class="home__left">
       <div class="header">
-        <h1 class="text-muted">Last {{ count }} replies of the <a :href="url">article</a> at seneweb</h1>
+        <h1 class="text-muted">Last {{ count }} replies of the <a :href="url">article </a>&nbsp;at seneweb</h1>
       </div>
         <div v-for="tweet in tweets" :key="tweet.id" class="block">
             <tweet :tweet="tweet"/>

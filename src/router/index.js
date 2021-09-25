@@ -28,7 +28,7 @@ const routes = [
   },
 
   {
-    path: "/replies/:tweetId?",
+    path: "/replies/:userId?/:tweetId?",
     name: "reply",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
