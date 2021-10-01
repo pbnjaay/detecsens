@@ -67,6 +67,12 @@ export default {
   flex-direction: column;
 }
 
+.tweet__sentiment ~ p {
+    font-weight: 200;
+    font-size: 1.5;
+    line-height: 1.4;
+}
+
 /* .arrow-link {
     text-transform: uppercase;
     text-decoration: none;

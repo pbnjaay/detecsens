@@ -106,7 +106,7 @@ export default {
 
 }
 
-h1 {
+.header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
