@@ -14,10 +14,10 @@
         </div>
     </div>
     <aside>
-      <form action="">
-          <h1>Search filter</h1>
-        <input type="text" v-model="hashtag" placeholder="hashtag example: senegal">
-        <button class="btn" @click="filter()">Search</button>
+      <form @submit.prevent="filter">
+          <h3>Hashtag filter</h3>
+        <input type="text"  v-model="hashtag" placeholder="hashtag example: senegal">
+        <!-- <button class="btn" @click="filter()">Search</button> -->
       </form>
     </aside>
   </div>
@@ -160,7 +160,7 @@ form {
   top: 3rem;
   margin-left: 3rem;
   flex-direction: column;
-  padding: 0.9rem 0.9rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 9px;
   box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2);
 }

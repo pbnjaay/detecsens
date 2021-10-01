@@ -1,8 +1,8 @@
 <template>
 <div class="home">
 <div class="form container">
-      <form>
-        <h1>Analyse seneweb article</h1>
+      <form @submit.prevent="analyse">
+        <h1>Analyse <a href="https://www.seneweb.com/" target="_blank">seneweb</a> article</h1>
         <input type="text" v-model="url" name="" id="" placeholder="url example: https://www.seneweb.com/news/xxx.html">
         <router-link :to="{name: 'seneweb', params: {url: url}}" class="btn" >Analyse</router-link>
       </form>
@@ -13,6 +13,7 @@
 <script>
 // @ is an alias to /src
 import { ref } from "vue";
+import { useRouter } from 'vue-router'
 import Tweet from '../components/Tweet.vue';
 
 export default {
@@ -22,7 +23,11 @@ export default {
   },
   setup() {
     const url = ref("");
-    return {url };
+    const router = useRouter();
+    const analyse = () => {
+      router.push({name:  'seneweb', params: {url: url.value}})
+    }
+    return {url, analyse, router, analyse };
   },
 };
 </script>
@@ -49,6 +54,10 @@ export default {
 
 .list__item {
   margin-right: 3rem;
+}
+
+h1 a {
+  color: #42b983;
 }
 
 

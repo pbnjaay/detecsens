@@ -1,7 +1,7 @@
 <template>
 <div class="home">
 <div class="form container">
-      <form>
+      <form @submit.prevent="analyse">
         <h1>Analyse tweet by user</h1>
         <input type="text" v-model="user" name="" id="" placeholder="username example: macky_sall">
         <router-link :to="{name: 'result', params: {userId: user, hashtag:hashtag }}" class="btn" >Analyse</router-link>
@@ -14,6 +14,7 @@
 // @ is an alias to /src
 import { ref } from "vue";
 import Tweet from '../components/Tweet.vue';
+import { useRouter } from 'vue-router'
 
 export default {
   name: "Home",
@@ -23,8 +24,13 @@ export default {
   setup() {
     const user = ref("");
     const hashtag = ref("");
+    const router = useRouter()
 
-    return {user, hashtag };
+    const analyse = () => {
+      router.push({name:  'result', params: {userId: user.value, hashtag:hashtag.value}})
+    }
+
+    return {user, hashtag, router, analyse };
   },
 };
 </script>
