@@ -1,9 +1,11 @@
 <template>
-    <div id="nav">
-      <router-link to="/">Twitter</router-link> |
-      <router-link to="/senform">Seneweb</router-link>
-    </div>
-  <router-view />
+<div>
+  <div id="nav">
+    <router-link to="/">Twitter</router-link> |
+    <router-link to="/senform">Seneweb</router-link>
+  </div>
+  <router-view></router-view>
+</div>
 </template>
 
 <style>
@@ -110,5 +112,15 @@ body {margin: 0;}
   font-size: 1rem;
   border-radius: 5px;
   text-align: center;
+}
+
+h1 {
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 1.8rem;
+  }
 }
 </style>

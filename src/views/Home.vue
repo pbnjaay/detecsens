@@ -2,7 +2,7 @@
 <div class="home">
 <div class="form container">
       <form>
-        <h2>Analyse sentiment by twitter user</h2>
+        <h1>Analyse tweet by user</h1>
         <input type="text" v-model="user" name="" id="" placeholder="username example: macky_sall">
         <router-link :to="{name: 'result', params: {userId: user, hashtag:hashtag }}" class="btn" >Analyse</router-link>
       </form>

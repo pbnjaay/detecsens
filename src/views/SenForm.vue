@@ -2,7 +2,7 @@
 <div class="home">
 <div class="form container">
       <form>
-        <h2>Analyse sentiment by seneweb article</h2>
+        <h1>Analyse seneweb article</h1>
         <input type="text" v-model="url" name="" id="" placeholder="url example: https://www.seneweb.com/news/xxx.html">
         <router-link :to="{name: 'seneweb', params: {url: url}}" class="btn" >Analyse</router-link>
       </form>

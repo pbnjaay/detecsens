@@ -43,8 +43,14 @@ export default {
   padding: 0.4rem 0.9rem 1rem 0.9rem;
   position: relative;
   cursor: pointer;
-  gap: 2rem;
   color: #2c3e50;
+  gap: 0.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+    .tweet {
+        gap: 2rem;
+    }
 }
 
 .tweet__emoji {
